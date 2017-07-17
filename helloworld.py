@@ -1,0 +1,5 @@
+name=input('please input your name:')
+age=input('please input your age:')
+age=int(age)
+print('hello,%s,your age is %d.' %(name,age))
+print('中文测试')
