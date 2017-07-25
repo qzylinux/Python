@@ -18,8 +18,9 @@ class grade(student):
 a=grade()
 a.score=99
 print(a.score)
-a.male=man
-print(a.male)
+#male不在__slot__允许范围内所以会报错
+#a.male=man
+#print(a.male)
 
 #定义一个方法（函数）
 def set_score(self,score):
@@ -31,4 +32,44 @@ student.set_score=set_score
 a.set_score(80)
 print(a.score)
 
+#*********************多重继承*****************************************
+#**************允许多重继承的设计为MixIn*******************************
 
+class  work(object):
+	def set_solar(self,solar):
+		self.solar=solar
+
+class  human(student,work):
+	pass
+
+#worker同时继承了work和student的属性和方法
+worker=human()
+worker.name='qiaozhiyuan'
+print(worker.name)
+worker.set_solar(15000)
+print(worker.solar)
+
+#*****************************枚举类*********************************
+from enum  import Enum,unique
+
+#装饰器，判断weekdays里面有无重复的value
+@unique
+#继承自Enum的类
+class weekdays(Enum):
+	mon=1
+	tue=2
+	wed=3
+	thu=4
+	fri=5
+	sat=6
+	sun=7
+
+print(weekdays.mon)
+print(weekdays['tue'])
+print(weekdays(1))
+print(weekdays.sun.value)
+
+#可以直接使用Enum类实例化,member是tuple
+day=Enum('week',('mon','tue','wed','thu','fri','sat','sun'))
+for name,member in day.__members__.items():
+	print(name ,'=>',member,':',member.value)
